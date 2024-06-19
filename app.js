@@ -14,16 +14,12 @@ const authRoute = require("./routes/auth");
 const adminRoute = require("./routes/admin");
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/not-found");
-const {
-  authMiddleware,
-  authorizePermissions,
-} = require("./middleware/authMiddleware");
+const { authMiddleware } = require("./middleware/authMiddleware");
 
 app.use(express.json());
 app.use(
   cors({
     origin: true,
-    credentials: true,
   })
 );
 
