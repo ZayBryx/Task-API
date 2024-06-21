@@ -17,7 +17,7 @@ const authMiddleware = async (req, res, next) => {
 
   const isRevoked = await Token.findOne({ token });
 
-  if (isRevoked?.blackListed === true) {
+  if (!isRevoked || isRevoked.blackListed === true) {
     throw new UnathenticatedError("Token Invalid: Unathenticated");
   }
 

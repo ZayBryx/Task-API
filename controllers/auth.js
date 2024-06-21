@@ -52,12 +52,16 @@ const logout = async (req, res) => {
   }
   const token = jwt.split(" ")[1];
 
-  const isExist = await Token.findOne({ token });
-  if (!isExist) {
-    throw new BadRequestError("");
+  const findToken = await Token.findOne({ token });
+
+  if (!findToken || findToken.balckListed === true) {
+    throw new BadRequestError("Invalid Token");
   }
 
+  findToken.blackListed = true;
   req.user = undefined;
+
+  await findToken.save();
 
   res.status(StatusCodes.OK).json({ message: "logged out successfully" });
 };
