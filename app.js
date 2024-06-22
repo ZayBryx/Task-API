@@ -20,8 +20,13 @@ app.use(express.json());
 app.use(
   cors({
     origin: true,
+    credentials: true,
   })
 );
+
+app.get("/test", (req, res) => {
+  res.json("Test");
+});
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/task", authMiddleware, taskRoute);
