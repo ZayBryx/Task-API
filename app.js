@@ -12,6 +12,8 @@ const PORT = 3000;
 const taskRoute = require("./routes/task");
 const authRoute = require("./routes/auth");
 const adminRoute = require("./routes/admin");
+const userRoute = require("./routes/user");
+
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/not-found");
 const { authMiddleware } = require("./middleware/authMiddleware");
@@ -29,6 +31,7 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/user", authMiddleware, userRoute);
 app.use("/api/v1/task", authMiddleware, taskRoute);
 app.use("/api/v1/admin", authMiddleware, adminRoute);
 app.use(errorHandler);
