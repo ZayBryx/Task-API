@@ -34,11 +34,11 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { userId } = req.user;
-  const { title, description, status } = req.body;
+  const { status } = req.body;
 
   const tasks = await Task.findOneAndUpdate(
     { _id: id, createdBy: userId },
-    { title, description, status },
+    { status },
     { new: true }
   )
     .populate("createdBy", "username")
