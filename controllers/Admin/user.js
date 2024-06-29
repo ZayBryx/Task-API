@@ -13,13 +13,17 @@ const getOneUser = async (req, res) => {
     throw new NotFoundError("User not found");
   }
 
-  res.status(StatusCodes.OK).json(user);
+  res.status(StatusCodes.OK).json({ name: user.username, value: user._id });
 };
 
 const getAllUser = async (req, res) => {
-  const user = await User.find({ role: "user" }).select("_id username role");
+  const user = await User.find({ role: "user" }).select("_id username");
+  const option = [];
+  user.map((u) => {
+    option.push({ name: u.username, value: u._id });
+  });
 
-  res.status(StatusCodes.OK).json(user);
+  res.status(StatusCodes.OK).json(option);
 };
 
 module.exports = {
