@@ -12,10 +12,22 @@ const getDashboard = async (req, res) => {
       },
     },
     {
+      $addFields: {
+        doneTasks: {
+          $filter: {
+            input: "$tasks",
+            as: "task",
+            cond: { $eq: ["$$task.status", true] },
+          },
+        },
+      },
+    },
+    {
       $project: {
         username: 1,
         role: 1,
         totalTasks: { $size: "$tasks" },
+        doneTasks: { $size: "$doneTasks" },
       },
     },
     {
