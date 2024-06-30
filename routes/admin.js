@@ -11,6 +11,7 @@ const {
 } = require("../controllers/Admin/task");
 
 const { getOneUser, getAllUser } = require("../controllers/Admin/user");
+const { getDashboard } = require("../controllers/Admin/dashboard");
 
 router
   .route("/task")
@@ -24,5 +25,7 @@ router
 
 router.get("/user", authorizePermissions("admin"), getAllUser);
 router.get("/user/:id", authorizePermissions("admin"), getOneUser);
+
+router.get("/dashboard", authorizePermissions("admin"), getDashboard);
 
 module.exports = router;

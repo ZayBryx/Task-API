@@ -3,9 +3,9 @@ const Task = require("../../models/task");
 const { BadRequestError, NotFoundError } = require("../../errors");
 
 const createTask = async (req, res) => {
-  const { title, description, category, createdBy } = req.body;
+  const { title, description, createdBy } = req.body;
 
-  const task = await Task.create({ title, description, category, createdBy });
+  const task = await Task.create({ title, description, createdBy });
 
   res.status(StatusCodes.CREATED).json(task);
 };
