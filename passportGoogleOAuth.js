@@ -5,10 +5,10 @@ const User = require("./models/user");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_SECRET_ID;
 
-const CALLBACK_URL = "http://localhost:3000/auth/google/callback";
-// process.env.NODE_ENV === "production"
-//   ? "https://your-domain.com/auth/google/callback"
-//   : ;
+const CALLBACK_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://task-api-b9w4.onrender.com/auth/google/callback"
+    : "http://localhost:3000/auth/google/callback";
 
 passport.use(
   new GoogleStrategy(
