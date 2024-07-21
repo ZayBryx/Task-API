@@ -26,6 +26,28 @@ app.use(
   })
 );
 
+const { OAuth2Client } = require("google-auth-library");
+const CLIENT_ID = process.env.CLIENT_ID;
+const client = new OAuth2Client(CLIENT_ID);
+
+app.post("/verifyIdToken", async (req, res) => {
+  const { idToken } = req.body;
+
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: idToken,
+      audience: CLIENT_ID, // Specify your Google Client ID
+    });
+
+    const payload = ticket.getPayload();
+
+    res.json({ userid, email, name, picture });
+  } catch (error) {
+    console.error("Error verifying Google ID token:", error);
+    res.status(401).json({ error: "Invalid token", msg: error.message });
+  }
+});
+
 app.get("/test", (req, res) => {
   res.json("Test");
 });
