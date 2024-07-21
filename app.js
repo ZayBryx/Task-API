@@ -41,7 +41,7 @@ app.post("/verifyIdToken", async (req, res) => {
 
     const payload = ticket.getPayload();
 
-    res.json({ userid, email, name, picture });
+    res.json(payload);
   } catch (error) {
     console.error("Error verifying Google ID token:", error);
     res.status(401).json({ error: "Invalid token", msg: error.message });
